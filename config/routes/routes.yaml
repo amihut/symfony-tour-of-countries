@@ -1,0 +1,5 @@
+pageNotFound:
+  path:  /{path}
+  controller: App\Controller\PageNotFoundController::pageNotFoundAction
+  requirements:
+    path: .*

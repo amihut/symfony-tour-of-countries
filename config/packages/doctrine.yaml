@@ -1,0 +1,25 @@
+doctrine:
+    dbal:
+        default_connection: dev
+        connections:
+            dev:
+              driver: pdo_mysql
+              dbname: dev
+              host: localhost
+              port: 3306
+              user: alin
+              password: 12wq!@WQ
+              server_version: '8.0.23'
+              charset: utf8mb4
+              url: '%env(resolve:DATABASE_URL)%'
+    orm:
+        auto_generate_proxy_classes: true
+        naming_strategy: doctrine.orm.naming_strategy.underscore_number_aware
+        auto_mapping: true
+        mappings:
+            App:
+                is_bundle: false
+                type: annotation
+                dir: '%kernel.project_dir%/src/Entity'
+                prefix: 'App\Entity'
+                alias: App
