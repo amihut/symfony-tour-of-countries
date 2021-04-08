@@ -27,4 +27,17 @@ class CountryCollection {
     public function length(): int {
         return count($this->countries);
     }
+
+    /**
+     * @return int
+     */
+    public function lengthComments(): int {
+        $count = 0;
+
+        foreach ($this->countries as $country) {
+            $count += $country->countComments();
+        }
+
+        return $count;
+    }
 }

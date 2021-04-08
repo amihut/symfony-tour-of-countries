@@ -16,9 +16,22 @@ const findByCode = (code) => {
     return http.get(`/locations/countries/code/${code}`);
 };
 
+const addComment = (id, comment) => {
+    return http.post(`/locations/countries/comments`, {
+        id: id,
+        comment: comment
+    });
+};
+
+const deleteCountry = (id) => {
+    return http.delete(`/locations/countries/id/${id}`);
+};
+
 export default {
     findByCode,
     findById,
     getAll,
-    update
+    update,
+    addComment,
+    deleteCountry
 };

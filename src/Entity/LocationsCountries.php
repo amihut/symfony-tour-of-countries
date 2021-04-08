@@ -2,7 +2,8 @@
 
 namespace App\Entity;
 
-use App\Repository\LocationsCountriesRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -31,6 +32,15 @@ class LocationsCountries {
      * @ORM\Column(type="string", length=255)
      */
     private $prefix;
+
+    /**
+     * @ORM\OneToMany(targetEntity=LocationsCountriesComments::class, mappedBy="LocationsCountries")
+     */
+    private $locationsCountriesComments;
+
+    public function __construct() {
+        $this->locationsCountriesComments = new ArrayCollection();
+    }
 
     /**
      * @return int|null
@@ -86,6 +96,39 @@ class LocationsCountries {
      */
     public function setPrefix(string $prefix): self {
         $this->prefix = $prefix;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|LocationsCountriesComments[]
+     */
+    public function getLocationsCountriesComments(): Collection {
+        return $this->locationsCountriesComments;
+    }
+
+    /**
+     * @param LocationsCountriesComments $locationsCountriesComment
+     * @return $this
+     */
+    public function addLocationsCountriesComment(LocationsCountriesComments $locationsCountriesComment): self {
+        if (!$this->locationsCountriesComments->contains($locationsCountriesComment)) {
+            $this->locationsCountriesComments[] = $locationsCountriesComment;
+            $locationsCountriesComment->setLocationsCountries($this);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @param LocationsCountriesComments $locationsCountriesComment
+     * @return $this
+     */
+    public function removeLocationsCountriesComment(LocationsCountriesComments $locationsCountriesComment): self {
+        // set the owning side to null (unless already changed)
+        if ($this->locationsCountriesComments->removeElement($locationsCountriesComment) && $locationsCountriesComment->getLocationsCountries() === $this) {
+            $locationsCountriesComment->setLocationsCountries(null);
+        }
 
         return $this;
     }

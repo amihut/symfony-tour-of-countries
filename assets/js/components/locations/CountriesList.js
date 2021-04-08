@@ -28,6 +28,22 @@ const CountriesList = () => {
             });
     };
 
+    const deleteCountry = () => {
+        CountriesDataService
+            .deleteCountry(currentCountry.id)
+            .then(response => {
+                setMessage("Country successfully deleted!");
+                setCountries(response.data.results);
+                setCurrentIndex(-1);
+                setCurrentCountry(null);
+                countries.splice(countries.indexOf(currentCountry), 1);
+                setCountries(countries);
+            })
+            .catch(e => {
+                setMessage(e.message);
+            });
+    };
+
     const findByCode = () => {
         if (!searchCode) {
             return;
@@ -72,7 +88,7 @@ const CountriesList = () => {
         if (event.key === 'Enter') {
             findByCode();
         }
-    }
+    };
 
     return (
         <Row>
@@ -145,6 +161,12 @@ const CountriesList = () => {
                         >
                             Edit
                         </Link>
+                        <button
+                            onClick={deleteCountry}
+                            className={"ml-2 btn btn-danger"}
+                        >
+                            Delete
+                        </button>
                     </div>
                 ) : (
                      <div>

@@ -18,7 +18,10 @@ class CountriesResponse {
      */
     public function __construct(CountryCollection $collection) {
         $this->response = map($this->toResponse(), $collection->getCountries());
-        $this->meta = ['count' => $collection->length()];
+        $this->meta = [
+            'count' => $collection->length(),
+            'commentsCount' => $collection->lengthComments()
+        ];
     }
 
     /**

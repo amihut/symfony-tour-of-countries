@@ -17,7 +17,7 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
-//TODO test exceptions handling
+//TODO test exceptions handling, use fixtures
 class LocationsCountriesControllerTest extends TestCase {
 
     /**
